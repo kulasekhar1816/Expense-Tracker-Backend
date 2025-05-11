@@ -1,0 +1,15 @@
+fastapi                  # The main backend framework for building APIs.
+hypercorn                # ASGI server (alternative to uvicorn); it runs your FastAPI app.
+sqlalchemy               # (object-relational mapping) ORM for managing MariaDB with Python classes (tables = models).
+asyncmy                  # Async driver for MariaDB
+pydantic                 # Data validation and serialization (used by FastAPI to define request/response models).
+pydantic[email]
+python-jose[cryptography]  # Used for creating and verifying JWT tokens (user authentication).
+python-multipart
+passlib[bcrypt]          # Used to hash and verify passwords securely.
+python-dotenv            # Loads environment variables from a .env file (for DB connection strings, secrets, etc).
+alembic                  # Handles schema migrations (like creating tables or changing columns easily).
+sendgrid
+matplotlib
+asyncmy
+sqlalchemy[asyncio]
