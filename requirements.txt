@@ -10,3 +10,4 @@ passlib[bcrypt]          # Used to hash and verify passwords securely.
 python-dotenv            # Loads environment variables from a .env file (for DB connection strings, secrets, etc).
 alembic                  # Handles schema migrations (like creating tables or changing columns easily).
 matplotlib
+pymysql
