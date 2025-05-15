@@ -16,6 +16,9 @@ class UserCreate(UserBase):
 class UserLogin(UserBase):
     password: str
 
+class DailyLimitSchema(BaseModel):
+    daily_limit: int
+
 class UserRead(UserBase):
     id: int
 
@@ -48,6 +51,7 @@ class Token(BaseModel):
     access_token: str
     token_type: str
     user_id: int
+    daily_limit: int
 
 class TokenData(BaseModel):
     username: str | None = None
