@@ -40,6 +40,7 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
 # --- Login --- #
 @router.post("/login", response_model=schemas.Token)
 def login(form_data: schemas.UserLogin, db: Session = Depends(get_db)):
+    print("INSIDE LOGIN")
     result = db.execute(select(models.User).where(models.User.username == form_data.username))
     user = result.scalars().first()
 
@@ -47,5 +48,15 @@ def login(form_data: schemas.UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
     user_id = user.id
+    print("user", user)
+    daily_limit = user.daily_limit
+    print("daily_limit", daily_limit)
     access_token = auth.create_access_token(data={"sub": str(user_id)})
-    return {"access_token": access_token, "token_type": "bearer", "user_id": user_id}
+    return {"access_token": access_token, "token_type": "bearer", "user_id": user_id, "daily_limit": daily_limit}
+
+@router.put("/limit")
+def update_limit(limit: schemas.DailyLimitSchema, current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+    current_user.daily_limit = limit.daily_limit
+    print("Daily Limit: ", limit)
+    db.commit()
+    return {"daily_limit": limit.daily_limit}
